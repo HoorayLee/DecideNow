@@ -18,7 +18,7 @@ struct OptionDetailView: View {
     var body: some View {
         List {
             Section(header: Text("Your option")) {
-                Text("Title: \(option.title)")
+                Text("\(option.title)")
                 HStack {
                     Label("Color", systemImage: "paintpalette")
                     Spacer()
@@ -29,6 +29,7 @@ struct OptionDetailView: View {
                         .cornerRadius(4)
                 }
                 .accessibilityElement(children: .combine)
+                Text("\(option.id)")
             }
         }
         .navigationTitle(option.title)
@@ -59,8 +60,8 @@ struct OptionDetailView: View {
                     }
             }
         }
-        ZStack{
-            Button("Remove") {
+        VStack{
+            Button("Remove", role: .destructive) {
                 isShowingDeletingAlert = true
             }
             .alert("Delete the option \(option.title) ?", isPresented: $isShowingDeletingAlert) {
@@ -69,7 +70,7 @@ struct OptionDetailView: View {
                     options = editingOptions
                     saveOptions(options: options)
                     isShowingDeletedAlert = true
-                    AlertView(options: $options).offset(x: 0, y: isShowingDeletedAlert ? 0:150)
+//                    AlertView(options: $options).offset(x: 0, y: isShowingDeletedAlert ? 0:150)
                 }
                 Button("Cancel", role: .cancel) {}
             }

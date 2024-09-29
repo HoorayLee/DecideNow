@@ -20,11 +20,13 @@ public class Option: Identifiable, Codable, Hashable {
     public let id: UUID
     var title: String
     var theme: Theme
+    var weight: Int32
     
-    init(id: UUID = UUID(), title: String, theme: Theme) {
+    init(id: UUID = UUID(), title: String, theme: Theme, weight: Int32) {
         self.id = id
         self.title = title
         self.theme = theme
+        self.weight = weight
     }
     
     required public init(from decoder:Decoder) throws {
@@ -32,20 +34,24 @@ public class Option: Identifiable, Codable, Hashable {
         id = try values.decode(UUID.self, forKey: .id)
         title = try values.decode(String.self, forKey: .title)
         theme = try values.decode(Theme.self, forKey: .theme)
+        weight = try values.decode(Int32.self, forKey: .weight)
     }
     
     public func equals(option: Option) -> Bool {
-        return self.title == option.title && self.theme == option.theme && self.id == option.id
+        return self.title == option.title
+        && self.theme == option.theme
+        && self.id == option.id
+        && self.weight == option.weight
     }
     
     public func getCopy() -> Option {
-        return Option(id: UUID(), title: self.title, theme: self.theme)
+        return Option(id: UUID(), title: self.title, theme: self.theme, weight: self.weight)
     }
 }
 
 extension Option {
     static var emptyOption: Option {
-        Option(title: "E.g., Go kayak!", theme: .sky)
+        Option(title: "E.g., Go kayak!", theme: .sky, weight: 1)
     }
 }
 
@@ -53,15 +59,15 @@ extension Option {
     static let sampleOptions: [Option] =
     [
         Option(title: "Visit a friend",
-                   theme: .yellow),
+               theme: .yellow, weight: 1),
         Option(title: "Movie theatre",
-                   theme: .orange),
+               theme: .orange, weight: 1),
         Option(title: "Bar",
-                   theme: .poppy),
+                   theme: .poppy, weight: 1),
         Option(title: "Hiking",
-                   theme: .lavender),
+                   theme: .lavender, weight: 1),
         Option(title: "Biking",
-                   theme: .seafoam)
+                   theme: .seafoam, weight: 1)
     ]
 }
 

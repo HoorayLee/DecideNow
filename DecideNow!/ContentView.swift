@@ -32,7 +32,9 @@ struct ContentView: View {
             NavigationLink(destination: AllOptionsView(options: $inputOptions)) {
                 Text("Edit")
             }
-            }}
+        }}
+        //TODO Fade-in background
+        //.background()
     }
 }
 

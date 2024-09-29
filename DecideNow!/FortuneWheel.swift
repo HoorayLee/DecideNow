@@ -19,32 +19,39 @@ public struct FortuneWheel: View {
     }
     
     public var body: some View {
-        ZStack(alignment: .center) {
-            GeometryReader { reader in
-                ZStack(alignment: .top) {
-                    ZStack(alignment: .center) {
-                        SpinWheelView(options: model.$options)
-                            .frame(width: reader.size.width * 9 / 10, height: reader.size.width * 9 / 10, alignment: .center)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: reader.size.width * 9 / 20)
-                                    .stroke(lineWidth: model.strokeWidth)
-                                    .foregroundColor(model.strokeColor)
-                            )
-                            .rotationEffect(.degrees(viewModel.degree))
-                            .shadow(radius: 10)
-                            .gesture(
-                                DragGesture().onChanged({ (value) in
-                                    if value.translation.width < 0 {
-                                        viewModel.degree = Double(-value.translation.width)
-                                    }
-                                }).onEnded({ (value) in
-                                    viewModel.spinWheel()
-                                })
-                            )
-                        SpinWheelBolt()
-                    }
-                    SpinWheelPointer(pointerColor: Color(hex: "75AB53")).offset(x: 0, y: -25)
-                }.frame(width: reader.size.width, height: reader.size.width, alignment: .center)
+        VStack{
+            ZStack(alignment: .center) {
+                GeometryReader { reader in
+                    ZStack(alignment: .top) {
+                        ZStack(alignment: .center) {
+                            SpinWheelView(options: model.$options)
+                                .frame(width: reader.size.width * 9 / 10, height: reader.size.width * 9 / 10, alignment: .center)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: reader.size.width * 9 / 20)
+                                        .stroke(lineWidth: model.strokeWidth)
+                                        .foregroundColor(model.strokeColor)
+                                )
+                                .rotationEffect(.degrees(viewModel.degree))
+                                .shadow(radius: 10)
+                                .gesture(
+                                    DragGesture().onChanged({ (value) in
+                                        if value.translation.width < 0 {
+                                            viewModel.degree = Double(-value.translation.width)
+                                        }
+                                    }).onEnded({ (value) in
+                                        viewModel.spinWheel()
+                                    })
+                                )
+                            SpinWheelBolt()
+                        }
+                        SpinWheelPointer(pointerColor: Color(hex: "75AB53")).offset(x: 0, y: -25)
+                    }.frame(width: reader.size.width, height: reader.size.width, alignment: .center)
+                }
+            }
+            Spacer()
+            Spacer()
+            Button("SPIN!") {
+                viewModel.spinWheel()
             }
         }
     }
