@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  DecideNow!
-//
-//  Created by 李洪锐 on 2024/9/12.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -13,8 +6,8 @@ struct ContentView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("\(inputOptions[selectedIndex].title)")
-                .font(.title)
-                .fontWeight(.semibold)
+                .font(.largeTitle)
+                .fontWeight(.light)
                 .multilineTextAlignment(.center)
                 .foregroundColor(inputOptions[selectedIndex].theme.mainColor)
             Spacer()
@@ -29,12 +22,15 @@ struct ContentView: View {
         }
         .toolbar {
             ToolbarItem {
-            NavigationLink(destination: AllOptionsView(options: $inputOptions)) {
-                Text("Edit")
+                NavigationLink(destination: AllOptionsView(options: $inputOptions)) {
+                    Text("Edit")
+                }
             }
-        }}
-        //TODO Fade-in background
-        //.background()
+        }
+        .background(
+            RadialGradient(gradient: Gradient(colors: [inputOptions[selectedIndex].theme.mainColor, .black]),
+                            center: .bottom, startRadius: 50, endRadius: 450)
+        )
     }
 }
 

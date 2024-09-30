@@ -1,15 +1,10 @@
-//
-//  FortuneWheelView.swift
-//  DecideNow!
-//
-//  Created by 李洪锐 on 2024/9/13.
 import SwiftUI
 
 @available(macOS 11.0, *)
 @available(iOS 14.0, *)
 
 public struct FortuneWheel: View {
-
+    @State private var showBackground = false
     private var model : FortuneWheelModel
     @StateObject private var viewModel: FortuneWheelViewModel
     

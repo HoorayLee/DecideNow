@@ -1,10 +1,3 @@
-//
-//  Theme.swift
-//  DecideNow!
-//
-//  Created by 李洪锐 on 2024/9/12.
-//
-
 import SwiftUI
 
 public enum Theme: String, CaseIterable, Identifiable, Codable {
